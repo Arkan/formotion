@@ -60,7 +60,8 @@ module Formotion
     # Subview Methods
     def push_subform(form)
       @subform_controller = Formotion::FormController.alloc.initWithForm(form)
-
+      @subform_controller.tableView.backgroundView = self.tableView.backgroundView
+      @subform_controller.tableView.backgroundColor = self.tableView.backgroundColor
       if self.navigationController
         self.navigationController.pushViewController(@subform_controller, animated: true)
       else
