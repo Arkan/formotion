@@ -22,6 +22,8 @@ module Formotion
     # them to be pased in the hash
     SERIALIZE_PROPERTIES = PROPERTIES + [:sections]
 
+    attr_accessor :on_dismiss_callback
+
     def self.persist(params = {})
       form = new(params)
       form.open
@@ -120,6 +122,9 @@ module Formotion
       @on_submit_callback = block
     end
 
+    def on_dismiss(&block)
+      @on_dismiss_callback = block
+    end
     # Triggers the #on_submit block
     # Handles either zero or one arguments,
     # as shown above.

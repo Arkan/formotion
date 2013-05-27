@@ -45,7 +45,6 @@ module Formotion
           row.text_field.resignFirstResponder
         end
       end
-
       # Setting @form.controller assigns
       # @form as the datasource and delegate
       # and reloads the data.
@@ -66,6 +65,16 @@ module Formotion
         self.navigationController.pushViewController(@subform_controller, animated: true)
       else
         self.presentModalViewController(@subform_controller, animated: true)
+      end
+    end
+
+    def viewWillDisappear(animated)
+      super
+      if self.navigationController
+        # View has been POPPED and NOT PUSHED !
+        if self.navigationController.viewControllers.indexOfObject(self) == NSNotFound
+          self.form.on_dismiss_callback.call(self.form) if self.form.on_dismiss_callback
+        end
       end
     end
 

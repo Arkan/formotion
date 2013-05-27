@@ -14,17 +14,18 @@ module Formotion
         switchView.when(UIControlEventValueChanged) do
           break_with_semaphore do
             row.value = switchView.isOn
+            row.on_change_callback.call(row) if row.on_change_callback
           end
         end
         switchView.userInteractionEnabled = row.editable?
         observe(self.row, "value") do |old_value, new_value|
           break_with_semaphore do
             switchView.setOn(row.value || false, animated: false)
+            row.on_change_callback.call(row) if row.on_change_callback
           end
         end
         nil
       end
-
     end
   end
 end

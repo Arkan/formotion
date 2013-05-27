@@ -136,6 +136,10 @@ module Formotion
     # callback for when a row is tapped
     attr_accessor :on_delete_callback
 
+    attr_accessor :on_select_callback
+
+    attr_accessor :on_change_callback
+
     # RowType object
     attr_accessor :object
 
@@ -292,6 +296,14 @@ module Formotion
 
     #########################
     # setters for callbacks
+
+    def on_change(&block)
+      self.on_change_callback = block
+    end
+
+    def on_select(&block)
+      self.on_select_callback = block
+    end
 
     def on_enter(&block)
       self.on_enter_callback = block

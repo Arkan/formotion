@@ -33,6 +33,7 @@ module Formotion
         elsif !row.section.select_one
           row.value = !row.value
         end
+        row.on_select_callback.call(row) if row.on_select_callback
       end
 
     end
