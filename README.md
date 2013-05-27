@@ -36,6 +36,7 @@ using this:
       title: "Remember?",
       key: :remember,
       type: :switch,
+      on_change: lambda {|row| puts "Value changed to #{row.value}"}
     }]
   }, {
     title: "Account Type",
@@ -45,15 +46,18 @@ using this:
       title: "Free",
       key: :free,
       type: :check,
+      on_select: lambda {|row| "Selected #{row.title}"}
     }, {
       title: "Basic",
       value: true,
       key: :basic,
       type: :check,
+      on_select: lambda {|row| "Selected #{row.title}"}
     }, {
       title: "Pro",
       key: :pro,
       type: :check,
+      on_select: lambda {|row| "Selected #{row.title}"}
     }]
   }, {
     rows: [{
@@ -71,7 +75,7 @@ And after the user enters some data, do this:
 
 ```ruby
 @form.render
-=> {:email=>"me@email.com", :password=>"password", 
+=> {:email=>"me@email.com", :password=>"password",
     :confirm=>"password", :remember=>true, :account_type=>:pro}
 ```
 
@@ -219,7 +223,7 @@ row.on_enter do |row|
   p "I'm called when the user taps the return key while typing in my text field"
 end
 ```
-     
+
 ## Forking
 
 Feel free to fork and submit pull requests! And if you end up using Formotion in your app, I'd love to hear about your experience.

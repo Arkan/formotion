@@ -24,4 +24,12 @@ describe "Switch Row" do
     @row.value = false
     cell.accessoryView.on?.should == false
   end
+
+  it "should respond to on_change_callback" do
+    @row.on_change_callback.should == nil
+    @row.on_change do |c|
+      puts "Row has been changed"
+    end
+    @row.on_change_callback.should.not == nil
+  end
 end

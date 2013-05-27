@@ -24,4 +24,12 @@ describe "Check Row" do
     @row.value = false
     cell.accessoryType.should == UITableViewCellAccessoryNone
   end
+
+  it "should respond to on_select_callback" do
+    @row.on_select_callback.should == nil
+    @row.on_select do |c|
+      puts "Row has been selected"
+    end
+    @row.on_select_callback.should.not == nil
+  end
 end

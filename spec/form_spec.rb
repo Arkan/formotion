@@ -52,7 +52,7 @@ describe "Forms" do
     row.title.should == "Label"
     row.subtitle.should == "Placeholder"
   end
-  
+
   it "should return row by key" do
     @form = Formotion::Form.new(sections: [{
       rows: [{
@@ -66,7 +66,7 @@ describe "Forms" do
     expected = @form.sections[0].rows[0]
     @form.row(:email).should == expected
   end
-  
+
   it "should return nil for row by key if key does not exist" do
     @form = Formotion::Form.new(sections: [{
       rows: [{
@@ -246,5 +246,14 @@ describe "Forms" do
     form = Formotion::Form.new(h)
 
     form.to_hash.should == h
+  end
+
+  it "should respond to on_dismiss" do
+    form = Formotion::Form.new
+    form.on_dismiss_callback.should == nil
+    form.on_dismiss do |f|
+      puts "Form dismiss callback"
+    end
+    form.on_dismiss_callback.should.not == nil
   end
 end
