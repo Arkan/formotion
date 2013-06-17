@@ -10,7 +10,9 @@ module Formotion
         delete_button.frame = cell.frame.tap do |f|
           f.origin.x = Formotion::RowType::Base.field_buffer / 2
           f.size.width -= Formotion::RowType::Base.field_buffer
-          f.size.height += 2 # To remove the bottom line of the Cell
+          if UIDevice.currentDevice.systemVersion < "7.0"
+            f.size.height += 2 # To remove the bottom line of the Cell
+          end
         end
         delete_button.setTitle(cell.textLabel.text, forState: UIControlStateNormal)
         delete_button.setBackgroundImage(UIImage.imageNamed("formotion/button_red.png"), forState:UIControlStateNormal)
@@ -18,6 +20,8 @@ module Formotion
         delete_button.titleLabel.color = UIColor.whiteColor
         delete_button.autoresizingMask = UIViewAutoresizingNone | UIViewAutoresizingFlexibleWidth
         delete_button.addTarget(self, action: :on_delete_pressed, forControlEvents: UIControlEventTouchUpInside)
+        delete_button.backgroundColor = UIColor.clearColor
+        cell.backgroundColor = UIColor.clearColor
         cell.addSubview(delete_button)
       end
 
